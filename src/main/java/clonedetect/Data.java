@@ -133,7 +133,7 @@ public class Data {
     //     }
     // }
     public static void loadEdgeInfo(String edgePath) {
-        // 创建 reader
+        //Create reader
         try (BufferedReader br = new BufferedReader(new FileReader(edgePath))) {
             String DELIMITER = ",";
             String line;

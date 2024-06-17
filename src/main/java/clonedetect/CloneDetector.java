@@ -33,7 +33,7 @@ public class CloneDetector extends Thread{
         HashSet<Integer> removeEle = NLineFilter(cloneCandidate, funcID, notNeedASTVerify);
         cloneCandidate.removeAll(removeEle);
         cloneCandidate.removeAll(notNeedASTVerify);
-        //verify phase, 在main函数中的GPT生成后 克隆检测前要对data中的div进行排序
+        //verify phase,After the GPT in the main function is generated, the divs in the data must be sorted before clone detection.
         removeEle = sourceCCVerify(cloneCandidate, funcID, notNeedASTVerify);
         cloneCandidate.removeAll(removeEle);
         cloneCandidate.removeAll(notNeedASTVerify);
@@ -69,7 +69,7 @@ public class CloneDetector extends Thread{
             Func c_block = data.allFuncs.get(c_block_index);
             int common_ngram = getCommonNGram(b_block_index, c_block.nGramSequences);
             int max_len = Math.max(c_block.funcLen, b_block.funcLen) - data.N + 1;
-            //若只考虑长度大于6的代码，这步可以省略
+            //If you only consider codes with a length greater than 6, this step can be omitted.
 //            if (min_len == 0) {
 //                min_len = 10;
 //            }
