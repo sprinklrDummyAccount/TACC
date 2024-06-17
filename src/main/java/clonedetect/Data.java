@@ -24,7 +24,7 @@ public class Data {
     public Map<Integer, HashSet<Integer>> clonePairs;
     public final static short edgeTypeNum = 100;
     public static Map<Integer, Short> edgeInfo = new HashMap<>(edgeTypeNum);
-    //后续删除
+    //Subsequent deletion
     public Map<Integer, Map<Integer, Double>> edgeScores = new HashMap<>();
 
 
@@ -103,7 +103,7 @@ public class Data {
         }
     }
 
-    //同时会得到func的token序列
+    //At the same time, the token sequence of func will be obtained.
     public void updateGPT(Map<Integer, Func> funcs, JavaLexicalAnalyzer javaLA) {
         for (Func func: funcs.values()) {
             for(String line: func.tokenSequence) {

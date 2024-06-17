@@ -23,8 +23,8 @@ public class JavaExtract {
         for (File f : files) {
             if (f.isDirectory()) {
                 dirList.add(f);
-            } else if(f.getName().endsWith(".java")){
-                // 这里列出当前文件夹根目录下的所有文件,并添加到fileList列表中
+            } else if(f.getName().endsWith(".java") || f.getName().endsWith(".ts")){
+                //Here lists all files in the root directory of the current folder and adds them to the fileList list
                 fileList.add(f.getPath());
             }
         }

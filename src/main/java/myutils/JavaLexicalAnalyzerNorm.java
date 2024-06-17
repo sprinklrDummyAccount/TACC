@@ -4,21 +4,21 @@ import java.util.*;
 
 public class JavaLexicalAnalyzerNorm {
     /*
-     * 1表示关键字
-     * 2表示标识符
-     * 3表示常数
-     * 4表示运算符
-     * 5表示界符
-     * 6表示字符串
+     * 1 indicates keyword
+     * 2 indicates identifier
+     * 3 means constant
+     * 4 represents operator
+     * 5 indicates boundary symbol
+     * 6 represents a string
      * */
 
-    /*关键字*/
+    /*keyword*/
     static String []keyWord={"private","protected","public","abstract","class","extends","final","implements",
             "interface","native","new","static","strictfp","break","continue","return","do","while","if","else","for",
             "instanceof","switch","case","default","boolean","byte","char","double","float","int","long","short",
             "String","null","true","false","void","this","const","goto","super","package","throws","throw","instanceof",
             "volatile","transient","synchronized","try","catch","import"};
-    //运算符
+    //operator
     static String []operation={"+","-","*","/","%","++","--","-=","+=","^=","*=","/=","&","|","^","~","<<",">>",">>>","==","!=",
             ">","<","=",">=","<=","&&","||","|","&","^","!","."};
     //界符
@@ -27,14 +27,14 @@ public class JavaLexicalAnalyzerNorm {
     Set<String> operations=null;
     Set<String> symbols=null;
 
-    //指向当前所读到字符串的位置的指针
+    //Pointer to the position of the currently read string
     int p;
 
     public JavaLexicalAnalyzerNorm() {
         init();
     }
 
-    //初始化把数组转换为ArrayList
+    //Initialize the array and convert it to ArrayList
     private void init(){
         keyWords=new HashSet<>();
         operations=new HashSet<>();
@@ -67,17 +67,17 @@ public class JavaLexicalAnalyzerNorm {
         return res;
     }
 
-    /*数字的识别
-     * 1、识别退出：
-     *   1.1、遇到空格符
-     *   1.2、遇到运算符或者界符
-     * 2、错误情况：
-     *   2.1、两个及以上小数点
-     *   2.2、掺杂字母
+    /*Identification of numbers
+     * 1. Recognize exit:
+     * 1.1. Encountering a space character
+     * 1.2. Encountering operators or delimiters
+     * 2. Error situation:
+     * 2.1, two or more decimal points
+     * 2.2. Doped letters
      * */
     private String digitCheck(String str){
         String token= String.valueOf(str.charAt(p++));
-        //判断数字的小数点是否有且是否大于1
+        //Determine whether the number has a decimal point and whether it is greater than 1
         int flag=0;
         boolean err=false;
         char ch;
@@ -110,7 +110,7 @@ public class JavaLexicalAnalyzerNorm {
         return token;
     }
 
-    //标识符，关键字的识别
+    //Identifier, keyword identification
     private String letterCheck(String str){
         String token= String.valueOf(str.charAt(p++));
         char ch;
@@ -131,7 +131,7 @@ public class JavaLexicalAnalyzerNorm {
         return token;
     }
 
-    //符号的识别
+    //Identification of symbols
     private String symbolCheck(String str){
         String token= String.valueOf(str.charAt(p++));
         char ch;
@@ -170,7 +170,7 @@ public class JavaLexicalAnalyzerNorm {
         return token;
     }
 
-    //字符串检查
+    //String check
     private String stringCheck(String str){
         String token= String.valueOf(str.charAt(p++));
         char ch;

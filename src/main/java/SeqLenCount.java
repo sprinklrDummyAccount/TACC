@@ -30,7 +30,7 @@ public class SeqLenCount {
         processes[preprocessThreadNum-1] = new PreProcess((preprocessThreadNum-1)*blocks, files_num, data, latch1);
         processes[preprocessThreadNum-1].t.start();
         try {
-            latch1.await();//开启门闩，阻塞所有线程，
+            latch1.await();//Open the latch and block all threads,
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -66,9 +66,9 @@ public class SeqLenCount {
             writeText.flush();
             writeText.close();
         }catch (FileNotFoundException e){
-            System.out.println("没有找到指定文件");
+            System.out.println("The specified file was not found");
         }catch (IOException e){
-            System.out.println("文件读写出错");
+            System.out.println("Error reading and writing files");
         }
 
         writeFile = new File("/bdata2/yyh/LVMapper_Java/data/ast10M.csv");
@@ -82,9 +82,9 @@ public class SeqLenCount {
             writeText.flush();
             writeText.close();
         }catch (FileNotFoundException e){
-            System.out.println("没有找到指定文件");
+            System.out.println("The specified file was not found");
         }catch (IOException e){
-            System.out.println("文件读写出错");
+            System.out.println("File read and write error");
         }
 
     }
