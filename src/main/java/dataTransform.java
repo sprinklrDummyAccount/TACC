@@ -13,7 +13,7 @@ public class dataTransform {
             String DELIMITER = ",";
             String line;
             while ((line = br.readLine()) != null) {
-                // 分割
+                // segmentation
                 FuncForTreeDiff tmpFunc = new FuncForTreeDiff();
                 //System.out.println(line);
                 String[] columns = line.split(DELIMITER);
@@ -65,7 +65,7 @@ public class dataTransform {
                         String DELIMITER = ",";
                         String line = br.readLine();
                         while ((line = br.readLine()) != null) {
-                            // 分割
+                            // segmentation
                             String[] columns = line.split(DELIMITER);
                             int aFuncIndex = Integer.parseInt(columns[0]);
                             int bFuncIndex = Integer.parseInt(columns[1]);
@@ -91,9 +91,9 @@ public class dataTransform {
             writeText.flush();
             writeText.close();
         }catch (FileNotFoundException e){
-            System.out.println("没有找到指定文件");
+            System.out.println("The specified file was not found");
         }catch (IOException e){
-            System.out.println("文件读写出错");
+            System.out.println("File reading and writing error");
         }
 
 

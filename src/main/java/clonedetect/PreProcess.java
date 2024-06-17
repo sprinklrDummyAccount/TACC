@@ -44,7 +44,7 @@ public class PreProcess extends Thread{
             this.data.addFunctions(tmpFuncs);
             setFuncNormLines(tmpFuncs);
             this.data.setFuncNGram(tmpFuncs);
-            //对token进行排序
+            //Sort tokens
             this.data.updateGPT(tmpFuncs, new JavaLexicalAnalyzer());
             setFunctionASTRepresentation(tmpFuncs);
             // if (i % 10000 == 0) {
@@ -65,7 +65,7 @@ public class PreProcess extends Thread{
                 for(String token : divLine) {
                     sb.append(token);
                 }
-                //token之间没有空格,更换hash函数节省内存
+                //There is no space between tokens, replace the hash function to save memory
                 normTokenSequence.add(Hashing.murmur3_128().hashBytes(sb.toString().getBytes()).toString());
             }
             func.normTokenSequence = normTokenSequence;
@@ -76,7 +76,7 @@ public class PreProcess extends Thread{
         for (Func tmpFunc: funcs.values()) {
             // if(tmpFunc.funcID % 10000 == 0) {
             //     System.out.println(tmpFunc.funcID);
-            //     System.out.println("使用内存"+(Runtime.getRuntime().totalMemory()-Runtime.getRuntime().freeMemory())/1024/1024); 
+            //     System.out.println("Use memory"+(Runtime.getRuntime().totalMemory()-Runtime.getRuntime().freeMemory())/1024/1024);
             // }
             StringBuffer sb = new StringBuffer();
             sb.append("class a_ {");
@@ -96,7 +96,7 @@ public class PreProcess extends Thread{
             tmpFunc.astNodeNum = (short)astNodeHash.size();
             tmpFunc.astNodeHashCnt = getHashCount(astNodeHash);
             tmpFunc.astNodeAllType = getAstVector(cu);
-            //之后不再用到，直接移除
+            //If it is no longer used in the future, remove it directly.
             cu = null;
             tmpFunc.tokenSequence = null;
             tmpFunc.normTokenSequence = null;
@@ -108,12 +108,12 @@ public class PreProcess extends Thread{
         Map<Node, Integer> visited = new HashMap<>();
         //Map<Node, Integer> nodeHeight = new HashMap<>();
         stack.push(cu);
-        //nodeHeight.put(cu, 1); //存放节点权重: 2^q - 1
+        //nodeHeight.put(cu, 1); //Storage node weight: 2^q - 1
         while (!stack.isEmpty()) {
             Node node = stack.peek();
             //int h = nodeHeight.get(node);
             List<Node> childrenNodes = node.getChildNodes();
-            /* 如果当前节点为叶子节点或者当前节点的子节点已经遍历过 */
+            /* If the current node is a leaf node or the child nodes of the current node have been traversed */
             if (childrenNodes.size() == 0 || visited.containsKey(node)) {
                 stack.pop();
                 int tmpHash = node.getClass().getSimpleName().hashCode();

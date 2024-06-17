@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 
 
-public class Main2 {
+public class Main {
     //private static String projectPath  = "/bdata2/yyh/dataset/6-14/";
     private static String projectPath = null;
     private static int threadNum = 50;
@@ -33,7 +33,7 @@ public class Main2 {
         System.out.println("All files num:"+files_num);
 
 
-        //获取所有函数
+        //Get all functions
         int divFileNum = (files_num + threadNum - 1)/threadNum;
         Data data = new Data(N, projectPath, allJavaFiles);
         PreProcess[] processes = new PreProcess[threadNum];
@@ -45,7 +45,7 @@ public class Main2 {
         processes[threadNum-1] = new PreProcess((threadNum-1)*divFileNum, files_num, data, latch1);
         processes[threadNum-1].t.start();
         try {
-            latch1.await();//开启门闩，阻塞所有线程，
+            latch1.await();//Opens the latch, blocks all threads,
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -60,7 +60,7 @@ public class Main2 {
         System.out.println("Preprocess time: "+TotalTime/1000f);
         startTime = System.currentTimeMillis();
 
-        System.out.println("使用内存"+(Runtime.getRuntime().totalMemory()-Runtime.getRuntime().freeMemory())/1024/1024); 
+        System.out.println("Use memory"+(Runtime.getRuntime().totalMemory()-Runtime.getRuntime().freeMemory())/1024/1024); 
         System.out.println("max memory"+Runtime.getRuntime().maxMemory()/1024/1024); 
         System.out.println("total memory"+Runtime.getRuntime().totalMemory()/1024/1024); 
         System.out.println("free memory"+Runtime.getRuntime().freeMemory()/1024/1024); 
@@ -68,18 +68,18 @@ public class Main2 {
 
         // File functionMap = new File(outputPath + "../../../data/allFunctionMap.csv");
         // try{
-        //     //第二步：通过BufferedReader类创建一个使用默认大小输出缓冲区的缓冲字符输出流
+        //     //Step 2: Create a buffered character output stream using the default size output buffer through the BufferedReader class
         //     BufferedWriter writeText = new BufferedWriter(new FileWriter(functionMap));
 
-        //     //第三步：将文档的下一行数据赋值给lineData，并判断是否为空，若不为空则输出
+        //     //Step 3: Assign the next line of data in the document to lineData and determine whether it is empty. If not, output it.
         //     for (Func tmpFunc : data.allFuncs.values()) {
         //         writeText.write(tmpFunc.funcID+","+tmpFunc.fileName+","+tmpFunc.startLine+","+tmpFunc.endLine);
         //         writeText.newLine();    //换行
         //     }
-        //     //使用缓冲区的刷新方法将数据刷到目的地中
+        //     //Use the buffer's refresh method to flush data to the destination
         //     writeText.flush();
-        //     //关闭缓冲区，缓冲区没有调用系统底层资源，真正调用底层资源的是FileWriter对象，缓冲区仅仅是一个提高效率的作用
-        //     //因此，此处的close()方法关闭的是被缓存的流对象
+        //     //Close the buffer. The buffer does not call the system's underlying resources. What actually calls the underlying resources is the FileWriter object. The buffer is just a function to improve efficiency.
+        //     //Therefore, the close() method here closes the cached stream object.
         //     writeText.close();
         // }catch (FileNotFoundException e){
         //     System.out.println("Don't find allFunctionMap.csv file!");
@@ -118,7 +118,7 @@ public class Main2 {
 
 
             System.out.println("the "+i+"st inverted index size is "+data.invertedIndex.size());
-            System.out.println("使用内存"+(Runtime.getRuntime().totalMemory()-Runtime.getRuntime().freeMemory())/1024/1024); 
+            System.out.println("Use memory"+(Runtime.getRuntime().totalMemory()-Runtime.getRuntime().freeMemory())/1024/1024); 
             System.out.println("max memory"+Runtime.getRuntime().maxMemory()/1024/1024); 
             System.out.println("total memory"+Runtime.getRuntime().totalMemory()/1024/1024); 
             System.out.println("free memory"+Runtime.getRuntime().freeMemory()/1024/1024); 
@@ -134,7 +134,7 @@ public class Main2 {
             ccThread[threadNum-1] = new CloneDetector(startIndex+(threadNum-1)*funcBlock, allFuncsNum, data, latch2);
             ccThread[threadNum-1].t.start();
             try {
-                latch2.await();//开启门闩，阻塞所有线程，
+                latch2.await();//Open the latch and block all threads,
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -149,10 +149,10 @@ public class Main2 {
         //     File writeFile = new File(outputPath+i+".csv");
 
         //     try{
-        //         //第二步：通过BufferedReader类创建一个使用默认大小输出缓冲区的缓冲字符输出流
+        //         //Step 2: Create a buffered character output stream using the default size output buffer through the BufferedReader class
         //         BufferedWriter writeText = new BufferedWriter(new FileWriter(writeFile));
 
-        //         //第三步：将文档的下一行数据赋值给lineData，并判断是否为空，若不为空则输出
+        //         //Step 3: Assign the next line of data in the document to lineData, and determine whether it is empty. If not, output it.
         //         for (Map.Entry<Integer, HashSet<Integer>> entry : data.clonePairs.entrySet()) {
         //             Func af = data.allFuncs.get(entry.getKey());
         //             for (int b: entry.getValue()) {
@@ -161,10 +161,10 @@ public class Main2 {
         //                 writeText.newLine(); 
         //             }
         //         }
-        //         //使用缓冲区的刷新方法将数据刷到目的地中
+        //         //Use the buffer's refresh method to flush data to the destination
         //         writeText.flush();
-        //         //关闭缓冲区，缓冲区没有调用系统底层资源，真正调用底层资源的是FileWriter对象，缓冲区仅仅是一个提高效率的作用
-        //         //因此，此处的close()方法关闭的是被缓存的流对象
+        //         //Close the buffer. The buffer does not call the system's underlying resources. What actually calls the underlying resources is the FileWriter object. The buffer is just a function to improve efficiency.
+        // //Therefore, the close() method here closes the cached stream object
         //         writeText.close();
         //     }catch (FileNotFoundException e){
         //         System.out.println("Don't find allFunctionMap.csv file!");

@@ -17,7 +17,7 @@ public class TreeDiff {
             String DELIMITER = ",";
             String line;
             while ((line = br.readLine()) != null) {
-                // 分割
+                // split
                 FuncForTreeDiff tmpFunc = new FuncForTreeDiff();
                 //System.out.println(line);
                 String[] columns = line.split(DELIMITER);
@@ -43,7 +43,7 @@ public class TreeDiff {
             String DELIMITER = ",";
             String line = br.readLine();
             while ((line = br.readLine()) != null) {
-                // 分割
+                // split
                 String[] columns = line.split(DELIMITER);
                 int aFuncIndex = Integer.parseInt(columns[0]);
                 int bFuncIndex = Integer.parseInt(columns[1]);
@@ -78,14 +78,14 @@ public class TreeDiff {
 
             for (String line : treeDiff) {
                 writeText.write(line);
-                writeText.newLine();    //换行
+                writeText.newLine();    //Newline
             }
             writeText.flush();
             writeText.close();
         }catch (FileNotFoundException e){
-            System.out.println("没有找到指定文件");
+            System.out.println("The specified file was not found");
         }catch (IOException e){
-            System.out.println("文件读写出错");
+            System.out.println("File read and write error");
         }
     }
 
@@ -143,9 +143,9 @@ public class TreeDiff {
             String tempString = null;
             int line = 1;
             sb.append("class a_ {\n");
-            // 一次读入一行，直到读入null为文件结束
+            //Read one line at a time until null is read as the end of the file
             while ((tempString = reader.readLine()) != null) {
-                // 显示行号
+                // Show line number
                 if (line >= startLine) {
                     break;
                 } else {
@@ -194,12 +194,12 @@ public class TreeDiff {
         Map<Node, Integer> visited = new HashMap<>();
         //Map<Node, Integer> nodeHeight = new HashMap<>();
         stack.push(cu);
-        //nodeHeight.put(cu, 1); //存放节点权重: 2^q - 1
+        //nodeHeight.put(cu, 1); //Store node weight: 2^q - 1
         while (!stack.isEmpty()) {
             Node node = stack.peek();
             //int h = nodeHeight.get(node);
             List<Node> childrenNodes = node.getChildNodes();
-            /* 如果当前节点为叶子节点或者当前节点的子节点已经遍历过 */
+            /* If the current node is a leaf node or the child nodes of the current node have been traversed */
             if (childrenNodes.size() == 0 || visited.containsKey(node)) {
                 stack.pop();
                 int tmpHash = node.getClass().getSimpleName().hashCode();

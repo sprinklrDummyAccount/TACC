@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 /**
  * @author 83477
- */
+ **/
 public class FunctionExtractor {
     public Map<Integer, Func> loadFile(String filePath) {
         Runtime runtime = Runtime.getRuntime();
@@ -38,7 +38,7 @@ public class FunctionExtractor {
                     el = (short)Integer.parseInt(ss[3].substring(9, ss[3].length()-2));
                     tmpLs = new ArrayList<>();
                 } else if (line.startsWith("</source>")) {
-                    //过滤长度小于6的函数
+                    //Filter function whose length is less than 6
                     if (tmpLs.size() >= 6) {
                         Func tmpFunc = new Func();
                         tmpFunc.fileName = funcName;
@@ -81,7 +81,7 @@ public class FunctionExtractor {
                 el = (short)Integer.parseInt(ss[3].substring(9, ss[3].length()-2));
                 tmpLs = new ArrayList<>();
             } else if (line.startsWith("</source>")) {
-                //过滤长度小于6的函数
+                //Filter function whose length is less than 6
                 if (tmpLs.size() >= 6) {
                     Func tmpFunc = new Func();
                     tmpFunc.fileName = funcName;
