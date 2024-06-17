@@ -116,7 +116,7 @@ public class CloneDetector extends Thread{
             List<Integer> c_block = data.allFuncs.get(c_block_index).divTokenSequence;
 
             int ct = (int)Math.ceil(Math.max(b_block.size(), c_block.size())*Data.verify_score);
-            //大于0.7不需要进一步验证
+            // Greater than 0.7 does not require further verification
             int mt = (int)Math.ceil(Math.max(b_block.size(), c_block.size())*0.7);
             int overlapTokenNum = overlapNum(b_block, c_block);
             if (overlapTokenNum < ct) {
@@ -150,7 +150,6 @@ public class CloneDetector extends Thread{
     }
 
     private double calJaccard(List<Short> v1, List<Short> v2) {
-        //暂未发现原因
         if (v1.size() == 0 || v2.size() == 0) {
             return 0;
         }
@@ -226,7 +225,7 @@ public class CloneDetector extends Thread{
         return res;
     }
 
-    //考虑c中的重复元素，但不考虑b中的
+    //Consider repeated elements in c, but not in b
     public int getCommonNGram(int b_block_index, List<String> c_ngram){
         int res = 0;
         for (String ngramHash : c_ngram) {
